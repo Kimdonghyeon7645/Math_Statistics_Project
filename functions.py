@@ -49,12 +49,17 @@ def list_data_preprocessing(sheet: list, add_row_header: bool = False):
 
 
 def get_average(content_li: list):
-    for i in range(2, len(content_li)):
-        if type(content_li[i][0]) == type("문자열") :
-            print(f"{content_li[i][0]} ", end='')
-        nums = [i for i in content_li[i][1:] if i]
-        print("평균 : ", round(sum(nums) / len(nums), 3))
+    result_li = []
 
+    if type(content_li[2][0]) == type("문자열"):
+        for row in content_li:
+            row.pop(0)
+
+    for i in range(2, len(content_li)):
+        nums = [i for i in content_li[i] if i]
+        result_li.append(round(sum(nums) / len(nums), 3))
+
+    return result_li
 
 
 if __name__ == '__main__':
