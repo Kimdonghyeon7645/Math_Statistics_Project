@@ -47,10 +47,18 @@ def list_data_preprocessing(sheet: list, add_row_header: bool):
             result_list[2+plus].extend(sheet[i+plus][4:])
 
 
+def get_average(content_li: list):
+    for i in range(2, len(content_li)):
+        print(f"{content_li[i][0]} 평균 : ", end='')
+        nums = [i for i in content_li[i][1:] if i]
+        print(round(sum(nums) / len(nums), 3))
+
+
 
 if __name__ == '__main__':
     # print(scan_xls_files(r"C:\Users\user\Documents\Math_Statistics_Project\학교 급식"))
     li = xls_file_to_list(r"C:\Users\user\Documents\Math_Statistics_Project\학교 급식\12_1월 학교급식 원산지 및 영양표시제.xls")
     # print(*li, sep="\n")
-    re_li = list_data_preprocessing(li, add_row_header=False)
-    print(*re_li, sep="\n")
+    re_li = list_data_preprocessing(li, add_row_header=True)
+    # print(*re_li, sep="\n")
+    get_average(re_li)
