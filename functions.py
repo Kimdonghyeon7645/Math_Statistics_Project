@@ -6,6 +6,7 @@ def scan_xls_files(path: str) -> list:
     해당 경로(:param path:) 안의
     xls 파일들 경로를 리스트로 반환(:return:)하는 함수
     """
+    path += '' if path[-1] == '/' else '/'
     return [path+i for i in os.listdir(path) if i.split('.')[-1] == 'xls']
 
 
@@ -20,7 +21,7 @@ def xls_file_to_list(path: str):
     return [load_ws.row_values(i) for i in range(load_ws.nrows)]
 
 
-def list_data_preprocessing(sheet: list, add_row_header: bool):
+def list_data_preprocessing(sheet: list, add_row_header: bool = False):
     """
     2차원 리스트(:param sheet:)를 받아
     날짜별 식단과 그의 영양소만 추출해 반환(:return:)하는 함수
@@ -49,15 +50,17 @@ def list_data_preprocessing(sheet: list, add_row_header: bool):
 
 def get_average(content_li: list):
     for i in range(2, len(content_li)):
-        print(f"{content_li[i][0]} 평균 : ", end='')
+        if type(content_li[i][0]) == type("문자열") :
+            print(f"{content_li[i][0]} ", end='')
         nums = [i for i in content_li[i][1:] if i]
-        print(round(sum(nums) / len(nums), 3))
+        print("평균 : ", round(sum(nums) / len(nums), 3))
 
 
 
 if __name__ == '__main__':
     # print(scan_xls_files(r"C:\Users\user\Documents\Math_Statistics_Project\학교 급식"))
-    li = xls_file_to_list(r"C:\Users\user\Documents\Math_Statistics_Project\학교 급식\12_1월 학교급식 원산지 및 영양표시제.xls")
+    # li = xls_file_to_list(r"C:\Users\user\Documents\Math_Statistics_Project\학교 급식\12_1월 학교급식 원산지 및 영양표시제.xls")
+    li = xls_file_to_list(r"C:\Users\user\Documents\Math_Statistics_Project\학교 급식\10월 학교급식 식재료 원산지 및 영양표시제.xls")
     # print(*li, sep="\n")
     re_li = list_data_preprocessing(li, add_row_header=True)
     # print(*re_li, sep="\n")
