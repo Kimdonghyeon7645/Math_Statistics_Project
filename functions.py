@@ -1,6 +1,7 @@
 import os
 import xlrd
 
+
 def scan_xls_files(path: str) -> list:
     """
     해당 경로(:param path:) 안의
@@ -48,7 +49,7 @@ def list_data_preprocessing(sheet: list, add_row_header: bool = False):
             result_list[2+plus].extend(sheet[i+plus][4:])
 
 
-def get_average(content_li: list):
+def get_list_average(content_li: list):
     """
     영양소 값 배열(:param content_li:)을 받아
     영양소의 평균을 반환(:return:)하는 함수
@@ -60,10 +61,24 @@ def get_average(content_li: list):
             row.pop(0)
 
     for i in range(2, len(content_li)):
-        nums = [i for i in content_li[i] if i]
-        result_li.append(round(sum(nums) / len(nums), 3))
-
+        result_li.append(get_average(content_li[i]))
     return result_li
+
+
+def get_average(target_li: list):
+    """
+    원하는 리스트(:param target_li:)를 전달받아
+    숫자만 추려 평균을 소수점 둘째자리로 반올림(:return:)한 값을 반환하는 함수
+    """
+    nums = [i for i in target_li if i]
+    return round(sum(nums) / len(nums), 2)
+
+
+def print_average(li_li: list):
+    header = ['에너지(kcal)', '탄수화물(g)', '단백질(g)', '지방(g)', '비타민A(R.E)', '티아민(mg)', '리보플라빈(mg)', '비타민C(mg)',
+              '칼슘(mg)', '철분(mg)']
+    for i, content in enumerate(list(zip(*li_li))):
+        print(f"{header[i]} 평균 : {get_average(content)}")
 
 
 if __name__ == '__main__':
@@ -73,4 +88,4 @@ if __name__ == '__main__':
     # print(*li, sep="\n")
     re_li = list_data_preprocessing(li, add_row_header=True)
     # print(*re_li, sep="\n")
-    get_average(re_li)
+
