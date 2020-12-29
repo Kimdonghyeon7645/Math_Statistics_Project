@@ -1,0 +1,5 @@
+nums = input().split("\t")
+e = eval("+".join(nums)) / len(nums)
+print([(float(num), float(num) - e) for num in nums])
+v = eval("+".join([str((float(num) - e) ** 2) for num in nums])) / len(nums)
+print(f"평균 : {e}\n분산 : {v}\n표준편차 : {v ** (1/2)}")
