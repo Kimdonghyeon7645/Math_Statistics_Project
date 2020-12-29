@@ -49,6 +49,10 @@ def list_data_preprocessing(sheet: list, add_row_header: bool = False):
 
 
 def get_average(content_li: list):
+    """
+    영양소 값 배열(:param content_li:)을 받아
+    영양소의 평균을 반환(:return:)하는 함수
+    """
     result_li = []
 
     if type(content_li[2][0]) == type("문자열"):
