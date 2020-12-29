@@ -1,12 +1,19 @@
 import os
 import xlrd
 
-def scan_xls_files(path: str):
-    """ 해당 경로 내의 xls 파일들을 스캔해서 리스트로 반환하는 함수 """
+def scan_xls_files(path: str) -> list:
+    """
+    해당 경로(:param path:) 안의
+    xls 파일들 경로를 리스트로 반환(:return:)하는 함수
+    """
     return [path+i for i in os.listdir(path) if i.split('.')[-1] == 'xls']
 
 
 def xls_file_to_list(path: str):
+    """
+    xls 파일의 경로(:param path:)를 받아
+    2차원 리스트로 변환해서 반환(:return:)하는 함수
+    """
     load_wb = xlrd.open_workbook(path)
     load_ws = load_wb.sheet_by_index(0)
 
@@ -14,6 +21,10 @@ def xls_file_to_list(path: str):
 
 
 def list_data_preprocessing(sheet: list):
+    """
+    2차원 리스트(:param sheet:)를 받아
+    날짜별 식단과 그의 영양소만 추출해 반환(:return:)하는 함수
+    """
     result_list = [['날짜'], ['식단'],
                    ['에너지(kcal)'], ['탄수화물(g)'], ['단백질(g)'], ['지방(g)'], ['비타민A(R.E)'], ['티아민(mg)'],
                    ['리보플라빈(mg)'], ['비타민C(mg)'], ['칼슘(mg)'], ['철분(mg)']]
