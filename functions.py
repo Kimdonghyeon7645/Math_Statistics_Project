@@ -68,13 +68,17 @@ def get_list_average(content_li: list):
 def get_average(target_li: list):
     """
     원하는 리스트(:param target_li:)를 전달받아
-    숫자만 추려 평균을 소수점 둘째자리로 반올림(:return:)한 값을 반환하는 함수
+    숫자만 추려 평균을 소수점 둘째자리로 반올림한 값을 반환(:return:)하는 함수
     """
     nums = [i for i in target_li if i]
     return round(sum(nums) / len(nums), 2)
 
 
 def print_average(li_li: list):
+    """
+    평균을 계산할 리스트(:param li_li:)를 전달받아
+    내용과 수치의 평균을 출력한 값을 반환(:return:)하는 함수
+    """
     header = ['에너지(kcal)', '탄수화물(g)', '단백질(g)', '지방(g)', '비타민A(R.E)', '티아민(mg)', '리보플라빈(mg)', '비타민C(mg)',
               '칼슘(mg)', '철분(mg)']
     for i, content in enumerate(li_li):
